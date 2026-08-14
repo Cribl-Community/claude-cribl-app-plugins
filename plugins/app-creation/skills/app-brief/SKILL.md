@@ -4,6 +4,10 @@ description: Generates the app brief from the app definition
 when_to_use: After completing APP_DEFINITION.md, to generate a comprehensive implementation brief
 ---
 
+## Pre-flight Check
+
+Before proceeding, verify you are in a scaffolded Cribl app folder. If you are not, stop and tell the user: "You must run this skill from within a scaffolded Cribl app folder."
+
 **Trigger:** Run this skill in the same folder where the `APP_DESCRIPTION.md` resides.
 
 **Input:** Contents of `APP_DESCRIPTION.md`
