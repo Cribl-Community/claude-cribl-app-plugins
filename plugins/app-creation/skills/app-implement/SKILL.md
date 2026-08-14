@@ -20,9 +20,13 @@ Implement app changes based on APP_BRIEF.md. Compares against last execution, im
 /app-implement --dry-run
 </command-examples>
 
+# Pre-flight Check
+
+Before proceeding, verify you are in a scaffolded Cribl app folder. If you are not, stop and tell the user: "You must run this skill from within a scaffolded Cribl app folder."
+
 # Instructions
 
-You are implementing a Cribl app based on an APP_BRIEF.md file. **Before starting, review `./references/cribl-apps-guidance.md`** to avoid common pitfalls with KV store, state management, error handling, and other Cribl-specific patterns.
+You are implementing a Cribl app based on an APP_BRIEF.md file. **Use Capra UI by default for all components.** Before starting, review `./references/cribl-apps-guidance.md` to avoid common pitfalls with KV store, state management, error handling, and other Cribl-specific patterns.
 
 Follow this workflow:
 

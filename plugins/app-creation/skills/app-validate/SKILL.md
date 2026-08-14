@@ -4,6 +4,10 @@ description: Validates that the app brief aligns with and solves the defined pro
 when_to_use: After generating APP_BRIEF.md, to validate it meets the problem requirements
 ---
 
+## Pre-flight Check
+
+Before proceeding, verify you are in a scaffolded Cribl app folder. If you are not, stop and tell the user: "You must run this skill from within a scaffolded Cribl app folder."
+
 **Trigger:** Run this skill after you have generate an `APP_BRIEF.md`
 
 **Input:** Reads 'APP_BRIEF'

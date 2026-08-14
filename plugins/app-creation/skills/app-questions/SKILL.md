@@ -4,6 +4,10 @@ description: Guides defining the problem the app solves, and associated workflow
 when_to_use: At the start of a new Cribl app project to define the problem and workflows
 ---
 
+## Pre-flight Check
+
+Before proceeding, verify you are in a scaffolded Cribl app folder. If you are not, stop and tell the user: "You must run this skill from within a scaffolded Cribl app folder."
+
 **Trigger:** Run this skill inside a Cribl app project directory to generate an app description.
 
 **Input:** Answer questions about the app's purpose, workflows, and problems it solves.
