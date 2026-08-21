@@ -2,6 +2,8 @@
 
 This plugin provides a structured workflow for authoring Cribl Apps. It guides you from problem definition through app brief generation, supporting validation at each step to ensure your app is well-scoped and ready for implementation.
 
+The workflow is **iterative and living** — you can update your definition at any time, and the plugin will incrementally update your brief and implementation.
+
 ---
 
 ## Quick Start
@@ -10,8 +12,8 @@ This plugin provides a structured workflow for authoring Cribl Apps. It guides y
 
 The `app-creation` plugin supports a three-phase workflow for Cribl app development:
 
-- **Phase 1 — Problem Definition:** Use `/app-questions` to define what problem your app solves, who uses it, and the key workflows it supports. Answers are saved to `APP_DEFINITION.md`.
-- **Phase 2 — Brief Generation & Validation:** Use `/app-brief` to generate a comprehensive implementation brief (`APP_BRIEF.md`) from your definition. Use `/app-validate` to validate it against quality gates (scope, clarity, completeness) before implementation.
+- **Phase 1 — Problem Definition:** Use `/app-questions` to define what problem your app solves, who uses it, and the key workflows it supports. Answers are saved to `APP_DEFINITION.md`. On subsequent runs, `/app-questions` provides an interactive editor to add/edit/delete workflows, data requirements, scope items, and more.
+- **Phase 2 — Brief Generation & Validation:** Use `/app-brief` to generate a comprehensive implementation brief (`APP_BRIEF.md`) from your definition. On subsequent runs, `/app-brief` intelligently detects changes to `APP_DEFINITION.md` and updates the brief incrementally, preserving elaborations and implementation details. Use `/app-validate` to validate it against quality gates (scope, clarity, completeness) before implementation.
 - **Phase 3 — Implementation:** Use `/app-implement` to incrementally implement app changes based on your `APP_BRIEF.md`. The skill compares against prior executions and only implements the delta.
 
 
@@ -21,16 +23,19 @@ The `app-creation` plugin supports a three-phase workflow for Cribl app developm
 - **Run in the app directory.** All skills operate on the current working directory — `cd` into your app folder before invoking commands. Run `npm run dev` to launch the app.
 - **Launch Preview** - Launch the preview in Cribl so you can test out the app after it is built.
 
-### Walk-through: new app from scratch after it has been scaffolded
+### Walk-through: Creating a new app from scratch
 
 ```
 $ cd ./apps/my-app-name
 $ npm run dev
 $ open another terminal in the same folder
+
+# Phase 1: Define the problem
 $ /app-questions
   # Answer questions about the app's problem, workflows, and scope.
   # Answers are saved to APP_DEFINITION.md.
 
+# Phase 2: Generate and validate the brief
 $ /app-brief
   # Generates APP_BRIEF.md (comprehensive, editable implementation brief).
   # Review and edit as needed.
@@ -39,12 +44,30 @@ $ /app-validate
   # Validates the brief against quality gates.
   # If validation fails, fix the brief and re-run.
 
+# Phase 3: Implement
 $ /app-implement
   # Implements the app based on APP_BRIEF.md.
   # Run again to implement subsequent changes.
 
 $ /app-implement --dry-run
   # Preview what will be implemented without making changes.
+```
+
+### Walk-through: Adding a new feature to an existing app
+
+```
+$ /app-questions
+  # An interactive menu appears (since APP_DEFINITION.md exists).
+  # Choose "Manage Workflows" or other sections to add/edit/delete.
+  # Changes are saved incrementally to APP_DEFINITION.md.
+
+$ /app-brief
+  # Detects changes to APP_DEFINITION.md.
+  # Updates APP_BRIEF.md incrementally, preserving existing elaborations.
+  # Review the updated sections.
+
+$ /app-implement
+  # Implements only the delta (new workflow, updated components, etc).
 ```
 
 ### Where files land
@@ -63,18 +86,24 @@ $ /app-implement --dry-run
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
-| `app-questions` | 1 | Define the problem, workflows, and scope of your app via guided Q&A |
-| `app-brief` | 2 | Generate an implementation brief from `APP_DEFINITION.md` |
+| `app-questions` | 1 | Define the problem, workflows, and scope of your app via guided Q&A. On subsequent runs, provides an interactive editor to add/edit/delete workflows, data requirements, and scope items. |
+| `app-brief` | 2 | Generate an implementation brief from `APP_DEFINITION.md`. On subsequent runs, intelligently updates the brief based on changes to the definition while preserving elaborations. |
 | `app-validate` | 2 | Validate the brief against quality gates (scope, clarity, completeness) |
-| `app-implement` | 3 | Implement app changes incrementally based on `APP_BRIEF.md` |
+| `app-implement` | 3 | Implement app changes incrementally based on `APP_BRIEF.md`. Compares against prior executions and implements only the delta. |
 
 ## FAQ / Gotchas
 
-**"Do I have to answer all 7 phases?"**
-Yes. Each phase gathers essential context. Skip one and your brief will have gaps. The skill enforces this.
+**"Do I have to answer all 7 phases on the first run?"**
+Yes. Each phase gathers essential context. Skip one and your brief will have gaps. The skill enforces this on first run.
 
 **"Can I edit `APP_DEFINITION.md` directly?"**
-Yes, absolutely. You can edit the file or re-run `/app-questions` — both work. Direct edits are faster for tweaks.
+Yes, absolutely. You can edit the file manually or use `/app-questions` — both work. Direct edits are faster for tweaks; `/app-questions` provides structured guidance and interactive menus for complex changes.
+
+**"How do I add a new workflow to an existing app?"**
+Run `/app-questions`, which will enter Edit Mode. Select "Manage Workflows" > "Add", and describe the new workflow. The changes are saved to `APP_DEFINITION.md`. Then run `/app-brief` to update the brief, and `/app-implement` to implement it.
+
+**"What happens when I re-run `/app-brief` after updating the definition?"**
+The skill detects changes to `APP_DEFINITION.md` and intelligently updates `APP_BRIEF.md`. New workflows are added, modified sections are updated, and existing elaborations are preserved. No content is lost.
 
 **"What if my app is super simple?"**
 Even simple apps benefit from explicit scope definition. You may find that "simple" clarifies into "has 3 workflows" or "no external integrations" — both valuable. Answer honestly and briefly.
@@ -90,6 +119,9 @@ Yes. Dry-run shows you exactly what will be implemented without making changes.
 
 **"Can the skills open a PR or commit?"**
 No. You manage git — the skills only produce local files. Run `git add` and `git commit` yourself.
+
+**"Is the workflow iterative?"**
+Yes, completely. Define the problem, generate a brief, validate, implement. Then add a new workflow, update the brief, implement again. The entire system is designed to support iteration.
 
 ---
 
