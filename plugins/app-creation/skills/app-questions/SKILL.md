@@ -84,14 +84,16 @@ When clarity issues are detected, the skill asks targeted follow-up questions to
 
 ### Phase 1: Understand the Problem
 **Guided discovery — ask ONE question at a time:**
-1. Ask: "What's the main problem this app solves?"
+1. Ask: "What is the app id?"
    - Wait for answer, clarify if needed
-2. Ask: "Who will use this app?"
+2. Ask: "What's the main problem this app solves?"
    - Wait for answer, clarify if needed
-3. Ask: "How are they currently solving this problem?"
+3. Ask: "Who will use this app?"
+   - Wait for answer, clarify if needed
+4. Ask: "How are they currently solving this problem?"
    - Wait for answer, clarify if needed
 
-**Clarity check:** Answers must include the problem, user role, and current workflow. Follow up if vague or missing context. Do NOT proceed to the next question until the current answer is clear and complete.
+**Clarity check:** Answers must include the app id, the problem, user role, and current workflow. Follow up if vague or missing context. Do NOT proceed to the next question until the current answer is clear and complete.
 
 ### Phase 2: Map User Workflows & Key Tasks
 **Guided workflow discovery:**
@@ -180,6 +182,9 @@ The skill persists answers incrementally to `APP_DEFINITION.md` in the app direc
 ```markdown
 # App Definition
 
+## App ID
+[User's answer for the app id]
+
 ## Problem
 [User's answer about what problem this solves]
 
@@ -254,34 +259,41 @@ When `APP_DEFINITION.md` already exists, the skill enters **Edit Mode** and pres
 ```
 === APP_DEFINITION.md Editor ===
 
-1. View/Edit Problem Statement
-2. View/Edit Target Users
-3. Manage Workflows (add, edit, delete, list)
-4. View/Edit Data & Integration Points
-5. View/Edit Permissions & Access
-6. View/Edit Scope (must-have, nice-to-have, out-of-scope)
-7. View/Edit UI Preferences
-8. View entire definition (read-only)
-9. Exit and save
+1. View/Edit App ID
+2. View/Edit Problem Statement
+3. View/Edit Target Users
+4. Manage Workflows (add, edit, delete, list)
+5. View/Edit Data & Integration Points
+6. View/Edit Permissions & Access
+7. View/Edit Scope (must-have, nice-to-have, out-of-scope)
+8. View/Edit UI Preferences
+9. View entire definition (read-only)
+10. Exit and save
 
-Enter choice (1-9):
+Enter choice (1-10):
 ```
 
 ### Menu Option Workflows
 
-#### Option 1: View/Edit Problem Statement
+#### Option 1: View/Edit App ID
+- Display current app id
+- Ask: "Edit this? (yes/no)"
+- If yes: Present current text and ask for new text
+- Update `APP_DEFINITION.md` and return to menu
+
+#### Option 2: View/Edit Problem Statement
 - Display current problem statement
 - Ask: "Edit this? (yes/no)"
 - If yes: Present current text and ask for new text
 - Update `APP_DEFINITION.md` and return to menu
 
-#### Option 2: View/Edit Target Users
+#### Option 3: View/Edit Target Users
 - Display current target users
 - Ask: "Edit this? (yes/no)"
 - If yes: Present current text and ask for new text
 - Update `APP_DEFINITION.md` and return to menu
 
-#### Option 3: Manage Workflows
+#### Option 4: Manage Workflows
 Show sub-menu:
 ```
 === Manage Workflows ===
@@ -318,7 +330,7 @@ Enter choice (1-5):
 - Ask: "Are you sure? (yes/no)"
 - Remove from `APP_DEFINITION.md` and return to sub-menu
 
-#### Option 4: View/Edit Data & Integration Points
+#### Option 5: View/Edit Data & Integration Points
 - Display current sections:
   - Data Display
   - Create/Modify/Delete
@@ -332,14 +344,14 @@ Enter choice (1-5):
   ```
 - For each: Display current, ask for edits, update file
 
-#### Option 5: View/Edit Permissions & Access
+#### Option 6: View/Edit Permissions & Access
 - Display current sections:
   - Different Users See Different Data?
   - Permission-Denied Behavior
 - Ask which to edit, apply updates
 - Update `APP_DEFINITION.md` and return to menu
 
-#### Option 6: View/Edit Scope
+#### Option 7: View/Edit Scope
 - Display current sections:
   - Must-Have (MVP)
   - Nice-to-Have (Defer)
@@ -350,18 +362,18 @@ Enter choice (1-5):
   - Delete item
 - Update `APP_DEFINITION.md` and return to menu
 
-#### Option 7: View/Edit UI Preferences
+#### Option 8: View/Edit UI Preferences
 - Display current sections:
   - Overall Structure
   - Look/Feel
 - Ask which to edit, apply updates
 - Update `APP_DEFINITION.md` and return to menu
 
-#### Option 8: View entire definition (read-only)
+#### Option 9: View entire definition (read-only)
 - Display full `APP_DEFINITION.md` content
 - Return to menu
 
-#### Option 9: Exit and save
+#### Option 10: Exit and save
 - Show summary of what changed this session
 - Confirm save (changes are already written incrementally)
 - Exit

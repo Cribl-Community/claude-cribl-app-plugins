@@ -67,14 +67,17 @@ Follow this workflow:
 
 ## 5. Implementation Mode (normal execution, no `--dry-run`)
 - Execute the delta: create files, modify code, update configs as needed
+- Read the app id from APP_DEFINITION.md (under "## App ID" section)
+- Update the "name" field in package.json to match the app id
 - Remove all linter errors, run `npm run lint`
 
-```
-
-## 7. Archive This Run
+## 6. Archive This Run
 - Copy current `APP_BRIEF.md` to `/executions/APP_BRIEF_[ISO8601-timestamp].md`
 - Use format: `APP_BRIEF_2026-07-31T14-30-45Z.md` (ISO 8601, with colons replaced by hyphens for filesystem compatibility)
 - This becomes the baseline for the next run
+
+## 7. Confirm Package.json Update
+- Verify that package.json's "name" field now matches the app id from APP_DEFINITION.md
 
 ## Key Principles
 - **Source of truth**: Current `APP_BRIEF.md` always wins
