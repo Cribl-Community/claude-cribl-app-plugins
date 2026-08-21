@@ -51,6 +51,9 @@ If `APP_BRIEF.md` does not exist, generate the implementation brief from scratch
 ```markdown
 # [App Name] - App Brief
 
+## App ID
+[The unique identifier for this app]
+
 ## Problem & Vision
 [Summary of the problem the app solves and how users benefit]
 
@@ -151,6 +154,7 @@ If `APP_BRIEF.md` already exists, intelligently update it based on changes to `A
 
 **Detection & Merging Logic:**
 1. Compare the two files to identify what changed in `APP_DEFINITION.md`:
+   - App ID changed
    - New workflows added
    - Workflows modified (name changed, description changed, or steps changed)
    - New data requirements (new fetch sources, create/modify/delete operations, state fields)
