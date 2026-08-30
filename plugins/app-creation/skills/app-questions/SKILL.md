@@ -1,6 +1,6 @@
 ---
 name: app-questions
-description: Guides defining the problem the app solves, and associated workflows. Also provides an interactive editor for updating existing definitions
+description: Guides defining the problem the app solves, and associated workflows. Also provides an interactive editor for updating existing definitions. Auto-generates CLAUDE.md for Claude Code guidance.
 when_to_use: At the start of a new Cribl app project to define the problem and workflows. Can also be run again to edit/update an existing APP_DEFINITION.md
 ---
 
@@ -385,6 +385,74 @@ Enter choice (1-5):
 - **Easy back out**: Always allow returning to previous menu without committing
 - **Multi-line input**: Support multi-line text for workflow descriptions, data requirements, etc.
 - **Summary on exit**: Show what was modified when exiting
+
+---
+
+## Generate CLAUDE.md
+
+Once `APP_DEFINITION.md` is complete, create a `CLAUDE.md` file in the app directory **only if it doesn't already exist**.
+
+**Template for CLAUDE.md:**
+
+```markdown
+# CLAUDE.md
+
+This file provides guidance to Claude Code when working with this Cribl app.
+
+## App Context
+
+This app is defined in `APP_DEFINITION.md` — read that for comprehensive problem statement, workflows, and scope.
+
+## Key References
+
+- `AGENTS.md` — How to build the app and navigate the app runtime environment
+- `APP_DEFINITION.md` — Full app requirements and workflows
+- `APP_BRIEF.md` — Implementation guide (generated from APP_DEFINITION)
+
+## Workflows & Data
+
+[If APP_DEFINITION.md has workflows, include a summary here, e.g.:]
+
+**Main Workflows:**
+- [Workflow 1 name and purpose]
+- [Workflow 2 name and purpose]
+
+**Key Data:**
+- [What the app displays]
+- [What the app creates/modifies]
+- [External integrations]
+
+## UI Structure
+
+[Include from APP_DEFINITION if specified, e.g.:]
+- Overall structure: [wizard/dashboard/form/table/etc]
+- Key screens: [list main screens/pages]
+
+## MVP Scope
+
+**Must-have (Phase 1):**
+- [Features from APP_DEFINITION MVP section]
+
+**Nice-to-have (Defer):**
+- [Features from APP_DEFINITION defer section]
+
+**Out of scope:**
+- [Features from APP_DEFINITION out-of-scope section]
+
+## Additional Guidance
+
+- Read the [Cribl Apps Builder Guide](https://docs.cribl.io/apps/builder-guide/) for patterns and best practices
+- Check `/app-brief` and `/app-validate` skills for guidance before implementation
+```
+
+**Instructions for Claude:**
+1. Check if `CLAUDE.md` already exists in the app directory
+2. If it does exist, stop — do not overwrite it
+3. If it does NOT exist, create it by:
+   - Using the template above as the base
+   - Filling in specific details from the completed `APP_DEFINITION.md` (workflows, data, scope, UI structure)
+   - Always including reference to `AGENTS.md` (it's in every app scaffold)
+   - Keeping any other references or guidance appropriate for the app
 
 ---
 
